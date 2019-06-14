@@ -1,0 +1,79 @@
+{
+  "name": "lendme",
+  "version": "1.0.0",
+  "description": "An application that allows customers to create a profile and apply for loans.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test nyc --reporter=text --reporter=html mocha server/tests --timeout 25000 --exit",
+    "dev": "nodemon --exec babel-node ./server/index.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel ./src --out-dir ./build",
+    "build": "npm run clean && npm run build-babel",
+    "start": "cross-env NODE_ENV=production npm run build && node ./build/index.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otaigbe/lendMe.git"
+  },
+  "author": "Otaigbe Okhueleigbe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otaigbe/lendMe/issues"
+  },
+  "homepage": "https://github.com/otaigbe/lendMe#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/register": "^7.0.0",
+    "babel-plugin-istanbul": "^5.1.0",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.18.9",
+    "nyc": "^13.1.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "bcrypt": "^3.0.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "joi": "^14.3.0",
+    "jsonwebtoken": "^8.3.0",
+    "mocha": "^5.2.0",
+    "multer": "^1.4.1",
+    "nodemailer": "^5.1.1",
+    "pg": "^7.7.1",
+    "rimraf": "^2.6.2",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
+  },
+  "engines": {
+    "node": "10.5.0"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  },
+  "nyc": {
+    "require": [
+      "@babel/register",
+      "@babel/polyfill"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  }
+}
