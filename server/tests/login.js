@@ -30,7 +30,6 @@ describe('Testing the signin method', () => {
     });
     expect(res).to.have.status(400);
     expect(res.body).to.have.property('status');
-    // expect(res.body).to.have.property('error');
   });
 
   it('should return an invalid username/password error message', async () => {
@@ -40,6 +39,5 @@ describe('Testing the signin method', () => {
     });
     expect(res).to.have.status(400);
     expect(res.body).to.have.property('status');
-    // expect(res.body).to.have.property('error');
   });
 });
