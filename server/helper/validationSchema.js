@@ -16,4 +16,18 @@ export default class Schemas {
         .required(),
     });
   }
+
+  /**
+   * returns schema for validating user signin data
+   * @returns {Object} schema for validation
+   */
+  static get signinSchema() {
+    return Joi.object({
+      email: Joi.string().email().min(5).trim()
+        .required(),
+      password: Joi.string().alphanum().trim().min(4)
+        .max(50)
+        .required(),
+    });
+  }
 }
