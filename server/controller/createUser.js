@@ -3,7 +3,7 @@ import Joi from 'joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
-import userStore from '../model/fixtures';
+import userStore from '../fixtures/users';
 import response from '../helper/responseSchema';
 import validationSchema from '../helper/validationSchema';
 import errorHandler from '../helper/errorHandler';

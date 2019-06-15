@@ -7,7 +7,7 @@ import winston from 'winston';
 import errorHandler from '../helper/errorHandler';
 import response from '../helper/responseSchema';
 import schema from '../helper/validationSchema';
-import userStore from '../model/fixtures';
+import userStore from '../fixtures/users';
 
 export default class LoginController {
   /**
