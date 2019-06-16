@@ -27,10 +27,10 @@ export default class LoginController {
         if (validPassword) {
           winston.info('Everything checks out');
           const {
-            firstname, lastname, email, token,
+            firstname, lastname, occupation, email, employedby, annualsalary, token,
           } = potentialUser;
           return res.status(200).json(response.success('You are now Logged in', {
-            firstname, lastname, email, token,
+            firstname, lastname, email, occupation, employedby, annualsalary, token,
           }));
         }
         return res.status(400).json(response.failure('Invalid username or password.', {}));

@@ -12,6 +12,9 @@ describe('Testing the CreateUser Endpoint', () => {
       lastname: 'okhueleigbe',
       password: 'airforceone',
       email: 'stanlex4400@gmail.com',
+      occupation: 'programmer',
+      employedby: 'free lance',
+      annualsalary: '10000000',
     });
     expect(res).to.have.status(201);
     expect(res.body).to.have.property('status');
@@ -36,6 +39,9 @@ describe('Testing the CreateUser Endpoint', () => {
       lastname: 'okhueleigbe',
       password: 'airforceone',
       email: 'stanlex4400@gmail.com',
+      occupation: 'programmer',
+      employedby: 'free lance',
+      annualsalary: '10000000',
     });
     expect(res).to.have.status(409);
     expect(res.body).to.have.property('status');

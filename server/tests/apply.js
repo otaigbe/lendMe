@@ -16,6 +16,35 @@ describe('Testing the loan application apply method', () => {
     expect(res).to.have.status(201);
   });
 
+  it('should return an invalid date message', async () => {
+    const res = await chai.request(app).post('/api/v1/apply').set('x-auth-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im90YWlnYmVAdGVzdGVyLmNvbSIsImlhdCI6MTU2MDUxNzIyOH0.0ZYts2B0hKEdo_SA5oxO5yOaT9B4rsm7ye_7wUHJ1Ks').type('form')
+      .send({
+        loanName: 'ren money',
+        begin: '2018-06-11',
+      });
+    expect(res).to.have.status(400);
+  });
+
+
+  it('return invalid code message', async () => {
+    const res = await chai.request(app).post('/api/v1/apply').set('x-auth-token', 'eyJhbGciOiJIUzI1NiIetryeyrsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im90YWlnYmVAdGVzdGVyLmNvbSIsImlhdCI6MTU2MDUxNzIyOH0.0ZYts2B0hKEdo_SA5oxO5yOaT9B4rsm7ye_7wUHJ1Ks').type('form')
+      .send({
+        loanName: 'ren money',
+        begin: '2018-06-11',
+      });
+    expect(res).to.have.status(400);
+  });
+
+
+  it('should return a bad request code with the massage of no loan with the provided name', async () => {
+    const res = await chai.request(app).post('/api/v1/apply').set('x-auth-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im90YWlnYmVAdGVzdGVyLmNvbSIsImlhdCI6MTU2MDUxNzIyOH0.0ZYts2B0hKEdo_SA5oxO5yOaT9B4rsm7ye_7wUHJ1Ks').type('form')
+      .send({
+        loanName: 'ren moneyo',
+        begin: '2022-06-11',
+      });
+    expect(res).to.have.status(400);
+  });
+
   it('should throw a 409 signifying an already existent loan application within that timeline', async () => {
     const res = await chai.request(app).post('/api/v1/apply').set('x-auth-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im90YWlnYmVAdGVzdGVyLmNvbSIsImlhdCI6MTU2MDUxNzIyOH0.0ZYts2B0hKEdo_SA5oxO5yOaT9B4rsm7ye_7wUHJ1Ks').type('form')
       .send({

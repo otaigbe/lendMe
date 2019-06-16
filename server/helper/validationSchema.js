@@ -17,6 +17,9 @@ export default class Schemas {
         .required(),
       email: Joi.string().email().min(5).trim()
         .required(),
+      occupation: Joi.string().min(2).trim().required(),
+      employedby: Joi.string().min(2).trim().required(),
+      annualsalary: Joi.string().min(2).trim().required()
     });
   }
 

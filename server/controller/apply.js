@@ -1,10 +1,6 @@
 /* eslint-disable consistent-return */
 import Joi from 'joi';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import uuid from 'uuid';
 import moment from 'moment';
-import userStore from '../fixtures/users';
 import response from '../helper/responseSchema';
 import validationSchema from '../helper/validationSchema';
 import errorHandler from '../helper/errorHandler';
@@ -30,9 +26,11 @@ export default class LoanApplication {
         return res.status(400).json(response.failure('Provide a valid date at which time you wish to access the loan! Starting from the next work day', {}));
       }
       const loanSought = loanStore.find(loan => loan.name.toLowerCase() === loanName);
+      if (loanSought == undefined) {
+        return res.status(400).json(response.failure(`There is no loan programme by this name:${loanName}`, {}));
+      }
       const loanDurationInMonths = parseInt(loanSought.tenure, 10);
       const expDate = moment(begin).add(loanDurationInMonths, 'months');
-      console.log(expDate.format('YYYY-MM-DD'));
       const { email } = req.user;
       const reply = helper.checkForActiveLoans(activeLoans, email, begin, res);
       if (reply != undefined || reply != null) {
@@ -55,7 +53,6 @@ export default class LoanApplication {
         loansContainer.push(loanPackage);
         activeLoans.set(email, loansContainer);
       }
-      console.log(activeLoans);
       return res.status(201).json(response.success('Loan Application Approved!', loanPackage));
     }
     errorHandler.validationError(res, result);
