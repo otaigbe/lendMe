@@ -24,7 +24,7 @@ export default class CreateUser {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       const {
-        firstname, lastname, email, id,
+        firstname, lastname, email, id, occupation, employedby, annualsalary,
       } = req.body;
       const user = {};
       const tokenObj = {};
@@ -35,6 +35,9 @@ export default class CreateUser {
       user.lastname = lastname;
       user.email = email;
       user.password = hashedPassword;
+      user.occupation = occupation;
+      user.employedby = employedby;
+      user.annualsalary = annualsalary;
       const token = jwt.sign(tokenObj, process.env.SECRETKEY);
       user.token = token;
       const alreadyExistentUser = helper.checkIfEmailAlreadyExists(userStore, user.email);

@@ -4,8 +4,6 @@ import response from './responseSchema';
 
 const moment = extendMoment(Moment);
 
-// const extMoment = momentRange.extendMoment(moment().format('YYYY MM DD'));
-
 export default class Helpers {
   /**
      * This method auto generates an email from the username provided
@@ -24,9 +22,6 @@ export default class Helpers {
         const end = new Date(loan.dueDate);
         const range = moment().range(begin, end);
         return range.contains(new Date(currentBeginDate));
-        // if (range.contains(new Date(currentBeginDate) === true)) {
-        //   return res.status(409).json(response.failure('You already have loan repayments scheduled for that period! Choose another begin date', {}));
-        // }
       });
       return reply;
     }
@@ -35,6 +30,5 @@ export default class Helpers {
   static customUpdate(map, key, value) {
     const activeLoans = map.get(key);
     activeLoans.push(value);
-    // map.set(key, activeLoans);
   }
 }

@@ -8,7 +8,7 @@ import Auth from '../middleware/auth';
 
 const router = express.Router();
 
-router.post('/createUser', createUser.register);
+router.post('/createUser', sanitizer.sanitizeUserBioData(), createUser.register);
 router.post('/login', sanitizer.loginTrimWhitespace(), loginController.logIn);
 router.get('/loans', Auth.auth, loans.getAvailableLoans);
 router.post('/apply', Auth.auth, sanitizer.applySanitizer(), application.apply);
