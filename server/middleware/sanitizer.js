@@ -14,4 +14,17 @@ export default class Sanitizer {
       check('email').isEmail().trim().normalizeEmail(),
     ];
   }
+
+  /**
+   * @param {object} req client request Object
+   * @param {object} res server response object
+   * @param {object} next control structure to continue processing
+   * @returns {JSON}
+   */
+  static applySanitizer() {
+    return [
+      check('loanName').trim().escape(),
+    ];
+  }
+
 }

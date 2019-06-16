@@ -1,4 +1,7 @@
-import Joi from 'joi';
+import joi from 'joi';
+import extension from '@hapi/joi-date';
+
+const Joi = joi.extend(extension);
 
 export default class Schemas {
   /**
@@ -28,6 +31,13 @@ export default class Schemas {
       password: Joi.string().alphanum().trim().min(4)
         .max(50)
         .required(),
+    });
+  }
+
+  static get loanApplicationSchema() {
+    return Joi.object({
+      loanName: Joi.string().trim().required(),
+      begin: Joi.date().format('YYYY-MM-DD'),
     });
   }
 }
